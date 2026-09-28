@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Support Agent</title>
+    <style>
+        body { font-family: Arial; max-width: 700px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+        h1 { color: #333; }
+        select, input, button { padding: 10px; margin: 10px 0; width: 100%; font-size: 14px; box-sizing: border-box; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background: #0056b3; }
+        #response { margin-top: 20px; padding: 15px; background: white; border-radius: 5px; min-height: 100px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .memory { color: green; font-size: 13px; margin-top: 15px; padding: 10px; background: #e8f5e9; border-left: 4px solid green; }
+        .agent-response { color: #007bff; font-weight: bold; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>🤖 AI Support Agent with Memory</h1>
+    <p>This agent learns from customer history and provides personalized support</p>
+    
+    <label><strong>Select Customer:</strong></label>
+    <select id="customer">
+        <option>Customer A (had login issue on Sept 20)</option>
+        <option>Customer B (had password reset issue on Sept 15)</option>
+        <option>Customer C (had billing issue on Sept 10)</option>
+    </select>
+    
+    <label><strong>Describe your issue:</strong></label>
+    <input type="text" id="issue" placeholder="e.g., I can't log in">
+    
+    <button onclick="sendMessage()">Send to Agent</button>
+    
+    <div id="response">
+        <p style="color: #999;">Response will appear here...</p>
+    </div>
+    
+    <script>
+        const fakeMemory = {
+            "Customer A (had login issue on Sept 20)": {
+                history: "Previous issue: Can't log in. Solution: Reset password via email link.",
+                lastIssue: "Sept 20",
+                response: "I remember you had login issues on Sept 20. Let me check if your password reset went through. Can you verify you received the email from us?"
+            },
+            "Customer B (had password reset issue on Sept 15)": {
+                history: "Previous issue: Password reset not working. Solution: Checked email spam folder, resent link.",
+                lastIssue: "Sept 15",
+                response: "I see your password reset didn't work on Sept 15. This time, let me verify your email isn't being filtered. Check your spam folder and let me know."
+            },
+            "Customer C (had billing issue on Sept 10)": {
+                history: "Previous issue: Billing charges not showing. Solution: Updated payment method, cleared cache.",
+                lastIssue: "Sept 10",
+                response: "Your billing issue from Sept 10 was resolved by updating your payment method. Let me verify your current card is valid and the charges are showing correctly now."
+            }
+        };
+        
+        function sendMessage() {
+            const customer = document.getElementById('customer').value;
+            const issue = document.getElementById('issue').value;
+            
+            if (!issue) {
+                alert('Please enter an issue');
+                return;
+            }
+            
+            const customerMemory = fakeMemory[customer];
+            
+            document.getElementById('response').innerHTML = `
+                <div class="agent-response">✓ Agent Response:</div>
+                <p>${customerMemory.response}</p>
+                <div class="memory">
+                    <strong>📚 Memory Recall:</strong><br>
+                    ${customerMemory.history}<br>
+                    <small>Last contacted: ${customerMemory.lastIssue}</small>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
