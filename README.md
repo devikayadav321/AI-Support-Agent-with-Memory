@@ -17,6 +17,14 @@ Customer support teams waste time repeating the same questions. Customers get fr
 - **Simple UI:** Easy for customers to interact with
 - **Real-time Learning:** Agent improves with each interaction
 
+## Why Memory Retrieval is Harder Than It Looks
+
+Initial approach: keyword matching on past tickets. Result—wrong matches. If a customer said "network down" last time and "WiFi broken" this time, the system didn't connect them.
+
+Solution: used semantic similarity (Hindsight) instead of keyword matching. Now similar issues get retrieved even if the language is different.
+
+Trade-off: Hindsight adds latency. Next phase is caching frequently-accessed histories.
+
 ## Demo
 Select a customer with existing support history, describe an issue, and watch the agent provide personalized help based on their past interactions.
 
